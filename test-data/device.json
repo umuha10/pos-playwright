@@ -1,5 +1,17 @@
 {
     "deviceName":{
         "name": "Ini Baru"
+    },
+    
+    "numericDeviceName":{
+        "name": "123456"
+    },
+
+    "charDeviceName":{
+        "name": "$#%@&"
+    },
+
+    "combinationDeviceName":{
+        "name": "Device - 1234"
     }
 }

@@ -11,7 +11,26 @@ import device from '../test-data/device.json';
 import users from '../test-data/users.json';
 
 // Membuat test case
-test('TC001 Login - Empty Username', async ({page}) => {
+test('TC001 Login - Empty Username & Password', async ({page}) => {
+    
+    // Membuat instance LoginPage
+    const loginPage = new LoginPage(page);
+
+    // Membuka halaman utama (baseURL + '/')
+    await page.goto('/');
+
+    // Login menggunakan username & password dari file users.json
+    await loginPage.login(
+        users.emptyUsernamePassword.username,
+        users.emptyUsernamePassword.password
+    );
+
+    await expect(page.getByText('Gagal Login')).toBeVisible();
+    await expect(page.getByText('required, required')).toBeVisible();
+})
+
+// Membuat test case
+test('TC002 Login - Empty Username', async ({page}) => {
     
     // Membuat instance LoginPage
     const loginPage = new LoginPage(page);
@@ -28,8 +47,9 @@ test('TC001 Login - Empty Username', async ({page}) => {
     await expect(page.getByText('Gagal Login')).toBeVisible();
     await expect(page.getByText('required')).toBeVisible();
 })
+
 // Membuat test case
-test('TC002 Login - Empty Password', async ({page}) => {
+test('TC003 Login - Empty Password', async ({page}) => {
     
     // Membuat instance LoginPage
     const loginPage = new LoginPage(page);
@@ -48,7 +68,7 @@ test('TC002 Login - Empty Password', async ({page}) => {
 })
 
 // Membuat test case
-test('TC003 Login - Invalid Username', async ({page}) => {
+test('TC004 Login - Invalid Username', async ({page}) => {
     
     // Membuat instance LoginPage
     const loginPage = new LoginPage(page);
@@ -67,7 +87,7 @@ test('TC003 Login - Invalid Username', async ({page}) => {
 })
 
 // Membuat test case
-test('TC004 Login - Invalid Password', async ({page}) => {
+test('TC005 Login - Invalid Password', async ({page}) => {
     
     // Membuat instance LoginPage
     const loginPage = new LoginPage(page);
@@ -86,7 +106,7 @@ test('TC004 Login - Invalid Password', async ({page}) => {
 })
 
 // Membuat test case
-test('TC005 Login - Invalid Username & Password', async ({page}) => {
+test('TC006 Login - Invalid Username & Password', async ({page}) => {
     
     // Membuat instance LoginPage
     const loginPage = new LoginPage(page);
@@ -106,7 +126,7 @@ test('TC005 Login - Invalid Username & Password', async ({page}) => {
 
 
 // Membuat test case
-test('TC006 Login - New device - Empty Device Name', async ({page}) => {
+test('TC007 Login - New device - Empty Device Name', async ({page}) => {
     
     // Membuat instance LoginPage
     const loginPage = new LoginPage(page);
@@ -140,7 +160,7 @@ test('TC006 Login - New device - Empty Device Name', async ({page}) => {
     await loginPage.registerButton.click();
 })
 
-test('TC007 Login - New Device - Fill Device Name', async ({page}) => {
+test('TC008 Login - New Device - Valid Device Name', async ({page}) => {
     // Membuat instance LoginPage
     const loginPage = new LoginPage(page);
 
@@ -156,6 +176,92 @@ test('TC007 Login - New Device - Fill Device Name', async ({page}) => {
     // Isi nama perangkat
     await loginPage.registerDevice(
         device.deviceName.name
+    );
+
+    await page.waitForTimeout(5000);
+
+    page.getByPlaceholder('Masukkan nama pelanggan');
+
+    // await expect(page).toHaveURL('/kasir');
+    await expect(
+        page.getByPlaceholder('Masukkan nama pelanggan')
+    ).toBeVisible();
+
+})
+
+test('TC009 Login - New Device - Numeric Device Name', async ({page}) => {
+    // Membuat instance LoginPage
+    const loginPage = new LoginPage(page);
+
+    // Membuka halaman utama (baseURL + '/')
+    await page.goto('/');
+
+    // Login menggunakan username & password dari file .env
+    await loginPage.login(
+        process.env.APP_USERNAME!,
+        process.env.APP_PASSWORD!
+    );
+
+    // Isi nama perangkat
+    await loginPage.registerDevice(
+        device.numericDeviceName.name
+    );
+
+    await page.waitForTimeout(5000);
+
+    page.getByPlaceholder('Masukkan nama pelanggan');
+
+    // await expect(page).toHaveURL('/kasir');
+    await expect(
+        page.getByPlaceholder('Masukkan nama pelanggan')
+    ).toBeVisible();
+
+})
+
+test('TC010 Login - New Device - Character Device Name', async ({page}) => {
+    // Membuat instance LoginPage
+    const loginPage = new LoginPage(page);
+
+    // Membuka halaman utama (baseURL + '/')
+    await page.goto('/');
+
+    // Login menggunakan username & password dari file .env
+    await loginPage.login(
+        process.env.APP_USERNAME!,
+        process.env.APP_PASSWORD!
+    );
+
+    // Isi nama perangkat
+    await loginPage.registerDevice(
+        device.charDeviceName.name
+    );
+
+    await page.waitForTimeout(5000);
+
+    page.getByPlaceholder('Masukkan nama pelanggan');
+
+    // await expect(page).toHaveURL('/kasir');
+    await expect(
+        page.getByPlaceholder('Masukkan nama pelanggan')
+    ).toBeVisible();
+
+})
+test('TC011 Login - New Device - Combination Device Name', async ({page}) => {
+    // Membuat instance LoginPage
+    const loginPage = new LoginPage(page);
+
+    // Membuka halaman utama (baseURL + '/')
+    await page.goto('/');
+
+    // Login menggunakan username & password dari file .env
+    await loginPage.login(
+        process.env.APP_USERNAME!,
+        process.env.APP_PASSWORD!
+    );
+
+    // Isi nama perangkat
+    await loginPage.registerDevice(
+        device.combinationDeviceName.name
     );
 
     await page.waitForTimeout(5000);
