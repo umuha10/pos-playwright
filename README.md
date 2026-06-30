@@ -60,3 +60,12 @@ https://github.com/umuha10
 - [ ] Data Driven Testing
 - [ ] Parallel Execution
 - [ ] CI/CD Integration
+
+## Test Scenario
+- [x] Login dan Register Perangkat
+  <img width="1575" height="787" alt="image" src="https://github.com/user-attachments/assets/8d521015-2165-4152-b03f-24aa0bc7ea00" />
+- [ ] Tambah Kategori
+- [ ] Edit Kategori
+- [ ] Hapus Kategori
+- [ ] dll menyusul 
+
