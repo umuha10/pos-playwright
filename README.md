@@ -64,7 +64,8 @@ https://github.com/umuha10
 ## Test Scenario
 - [x] Login dan Register Perangkat
   <img width="1575" height="787" alt="image" src="https://github.com/user-attachments/assets/8d521015-2165-4152-b03f-24aa0bc7ea00" />
-- [ ] Tambah Kategori
+- [x] Tambah Kategori
+  <img width="1919" height="1144" alt="image" src="https://github.com/user-attachments/assets/f651a030-8f23-4625-bd04-ebdee73d0d35" />
 - [ ] Edit Kategori
 - [ ] Hapus Kategori
 - [ ] dll menyusul 
