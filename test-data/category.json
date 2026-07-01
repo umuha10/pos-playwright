@@ -1,0 +1,27 @@
+{
+    "validCategory":{
+        "name": "Bumbu Dapur"
+    },
+
+    "charCategory":{
+        "name": "#$@@!$%"
+    },
+
+    "numericCategory":{
+        "name": "124456"
+    },
+
+    "combiCategory":{
+        "name": "Baby & Mom 123"
+    },
+    "duplicateCategory":{
+        "name": "Snack Sehat"
+    },
+
+    "emptyCategory":{
+        "name": ""
+    },
+    "longCategory":{
+        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ultrices, dolor vel faucibus elementum, mi ligula aliquam tortor, et pellentesque velit est eu nibh. Nullam in neque sed eros mollis bibendum.Duis quis vehicula elit, at tincidunt eros.Ut"
+    }
+}
