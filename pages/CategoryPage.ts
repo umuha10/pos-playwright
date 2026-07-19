@@ -13,6 +13,9 @@ export class CategoryPage {
     addCategoryButton = this.page.getByRole('button',{
         name: 'Tambah Kategori',
     });
+    cancelCategoryButton = this.page.getByRole('button',{
+        name: "Batal",
+    });
 
     async addCategory(categoryName: string){
         await this.addCategoryButton.click();

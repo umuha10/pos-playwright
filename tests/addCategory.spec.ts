@@ -4,7 +4,7 @@ import { LoginPage } from "../pages/LoginPage";
 import device from "../test-data/device.json";
 import category from "../test-data/category.json";
 
-test('TC001 - Access Category Menu', async ({page})=> {
+test('TC001 - Access Category Menu Form', async ({page})=> {
     const loginPage = new LoginPage(page);
     const categoryPage = new CategoryPage(page);
     
@@ -26,13 +26,13 @@ test('TC001 - Access Category Menu', async ({page})=> {
     await page.waitForTimeout(5000);
 
     await categoryPage.categoryManagementButton.click();
-    await page.waitForTimeout(5000);
 
-    await expect(
-        page.getByRole('navigation').nth(1)
-    ).toContainText('Manajemen Kategori');
+    await categoryPage.addCategoryButton.click();
+        
+    await expect (
+        page.getByRole('heading', { name: 'Tambah Kategori' })
+    ).toBeVisible();
 
-    await expect(page).toHaveURL('/kategori');
 })
 
 test('TC002 - Add Category - Valid Category Name', async ({page})=>{
@@ -63,6 +63,17 @@ test('TC002 - Add Category - Valid Category Name', async ({page})=>{
     await categoryPage.addCategory(
         category.validCategory.name
     );
+
+    await expect(
+        page.getByText("Kategori Ditambahkan")
+    ).toBeVisible();
+    
+    await expect(
+        page.getByText("Kategori baru berhasil ditambahkan.")
+    ).toBeVisible();
+
+    await page.getByPlaceholder('Cari kategori...').fill(category.validCategory.name);
+    await page.keyboard.press('Enter');
 
     await expect(
         page.getByText("Kategori Ditambahkan")
@@ -148,6 +159,17 @@ test('TC004 - Add Category - Character Category Name', async ({page})=>{
         category.charCategory.name
     );
 
+    await page.getByPlaceholder('Cari kategori...').fill(category.charCategory.name);
+    await page.keyboard.press('Enter');
+
+    await expect(
+        page.getByText("Kategori Ditambahkan")
+    ).toBeVisible();
+    
+    await expect(
+        page.getByText("Kategori baru berhasil ditambahkan.")
+    ).toBeVisible();
+
     await expect(
         page.getByText(category.charCategory.name)
     ).toBeVisible();
@@ -183,6 +205,17 @@ test('TC005 - Add Category - Numeric Category Name', async ({page})=>{
         category.numericCategory.name
     );
 
+    await page.getByPlaceholder('Cari kategori...').fill(category.numericCategory.name);
+    await page.keyboard.press('Enter');
+
+    await expect(
+        page.getByText("Kategori Ditambahkan")
+    ).toBeVisible();
+    
+    await expect(
+        page.getByText("Kategori baru berhasil ditambahkan.")
+    ).toBeVisible();
+
     await expect(
         page.getByText(category.numericCategory.name)
     ).toBeVisible();
@@ -217,6 +250,17 @@ test('TC006 - Add Category - Alphanumeric & character Category Name', async ({pa
     await categoryPage.addCategory(
         category.combiCategory.name
     );
+
+    await page.getByPlaceholder('Cari kategori...').fill(category.combiCategory.name);
+    await page.keyboard.press('Enter');
+
+    await expect(
+        page.getByText("Kategori Ditambahkan")
+    ).toBeVisible();
+    
+    await expect(
+        page.getByText("Kategori baru berhasil ditambahkan.")
+    ).toBeVisible();
 
     await expect(
         page.getByText(category.combiCategory.name)
@@ -290,6 +334,9 @@ test('TC008 - Add Category - Long Category Name', async ({page})=>{
     await categoryPage.addCategory(
         category.longCategory.name
     );
+
+    await page.getByPlaceholder('Cari kategori...').fill(category.longCategory.name);
+    await page.keyboard.press('Enter');
     
     await expect(
         page.getByText("Kategori Ditambahkan")
@@ -301,5 +348,34 @@ test('TC008 - Add Category - Long Category Name', async ({page})=>{
 
     await expect(
         page.getByText(category.longCategory.name)
+    ).toBeVisible();
+})
+
+test('TC009 - Add Category - "Batal" Button', async ({page})=>{
+    const loginPage = new LoginPage(page);
+    const categoryPage = new CategoryPage(page);
+    
+    
+    await page.goto('/');
+
+    await loginPage.login(
+        process.env.APP_USERNAME!,
+        process.env.APP_PASSWORD!
+    );
+
+    await loginPage.registerDevice(
+        device.deviceName.name
+    );
+    await page.waitForTimeout(5000);
+    await page.goto('/stok');
+
+    await categoryPage.categoryManagementButton.click();
+
+    await categoryPage.addCategoryButton.click();
+
+    await categoryPage.cancelCategoryButton.click();
+
+    await expect (
+        page.getByText("Manajemen Kategori")
     ).toBeVisible();
 })

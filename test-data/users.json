@@ -1,0 +1,26 @@
+{
+  "emptyUsername": {
+    "username": "",
+    "password": "password123"
+  },
+  "emptyPassword": {
+    "username": "user123",
+    "password": ""
+  },
+  "invalidUsername": {
+    "username": "wronguser",
+    "password": "password123"
+  },
+  "invalidPassword": {
+    "username": "user123",
+    "password": "wrongpassword"
+  },
+  "invalidUsernamePassword": {
+    "username": "wronguser",
+    "password": "wrongpassword"
+  },
+  "emptyUsernamePassword":{
+    "username": "",
+    "password": ""
+  }
+}
